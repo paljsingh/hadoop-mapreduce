@@ -18,21 +18,19 @@ if __name__ == '__main__':
     delim = "\t"
     reducer = Reducer(sys.stdin, delim)
 
-    last_total = 0
-    last_country = None
+    last_total = 0.0
     last_year = None
     last_item_type = None
-    for (year, item_type, country, units_sold) in reducer.read_in():
-        if country == last_country and year == last_year and item_type == last_item_type:
-            last_total += int(units_sold)
+    for (year, item_type, profit) in reducer.read_in():
+        if year == last_year and item_type == last_item_type:
+            last_total += float(profit)
             pass
         else:   # new record, print the last one's stats
-            if last_country:    # handle initial case when last_country is None
-                print('{}\t{}\t{}\t{}'.format(last_year, last_item_type, last_country, last_total))
-            last_country = country
+            if last_item_type:    # handle initial case when last_country is None
+                print('{}\t{}\t{}'.format(last_year, last_item_type, last_total))
             last_year = year
             last_item_type = item_type
-            last_total = int(units_sold)
+            last_total = float(profit)
 
     # last item
-    print('{}\t{}\t{}\t{}'.format(last_year, last_item_type, last_country, last_total))
+    print('{}\t{}\t{}'.format(last_year, last_item_type, last_total))

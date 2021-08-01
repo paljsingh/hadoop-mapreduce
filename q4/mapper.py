@@ -48,10 +48,10 @@ if __name__ == '__main__':
     iterator = mapper.read_in()
     next(iterator)      # skip header
 
-    # Total units_sold by year for a given country and a given item type
+    # What are the top 10 order id for a given year by the total_profit
     # we are using 'order_date' field for extracting the year
     for fields in iterator:
-        (year, item_type, country, units_sold) = (fields[Columns.order_date.value][:4], fields[Columns.item_type.value],
-                                                  fields[Columns.country.value], fields[Columns.units_sold.value])
+        (year, item_type, total_profit) = (fields[Columns.order_date.value][:4], fields[Columns.item_type.value],
+                                           fields[Columns.total_profit.value])
 
-        print('{}\t{}\t{}\t{}'.format(year, item_type, country, units_sold))
+        print('{}\t{}\t{}'.format(year, item_type, total_profit))

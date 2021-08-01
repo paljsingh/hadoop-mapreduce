@@ -61,3 +61,21 @@ hdfs dfs -cat output-q3/part-00000 | grep -i India | grep 2019
 
 is the same as:
 cat data/geosales.csv| ./q3/mapper.py | sort -k1n -k2 -k3 | ./q3/reducer.py | grep India | grep 2019
+
+
+---
+
+hdfs dfs -cat output-q4-final/part-00000  | grep 2021
+2021	Cosmetics	393574566.17999995
+2021	Household	349445019.59999985
+2021	Office Supplies	278403848.75
+2021	Baby Food	212335939.1799999
+2021	Cereal	194677499.48999992
+2021	Clothes	159609428.64000002
+2021	Vegetables	139390598.09
+2021	Snacks	119309395.56000003
+2021	Meat	108143006.4000001
+2021	Personal Care	55220762.51999999
+
+The output from the second mapreduce job is the same as running the command:
+$ cat data/geosales.csv| ./q4/mapper.py | sort -k1n -k2 | ./q4/reducer.py | sort -t $'\t' -k1n -k3nr | ./q4/reducer2.py | grep 2021
