@@ -17,20 +17,18 @@ class Reducer:
 if __name__ == '__main__':
     delim = "\t"
     reducer = Reducer(sys.stdin, delim)
+    top_n = int(sys.argv[1]) if len(sys.argv) > 1 else 10
 
-    last_total = 0.0
     last_year = None
-    last_item_type = None
-    for (year, item_type, profit) in reducer.read_in():
-        if year == last_year and item_type == last_item_type:
-            last_total += float(profit)
-            pass
-        else:   # new record, print the last one's stats
-            if last_item_type:    # handle initial case when last_country is None
-                print('{}\t{}\t{}'.format(last_year, last_item_type, last_total))
+    count = 0
+    for (year, order_id, profit) in reducer.read_in():
+        if year == last_year:
+            if count < top_n:
+                print('{}\t{}\t{}'.format(year, order_id, profit))
+            else:
+                pass  # skip these items.
+        else:  # new record, print the last one's stats
+            print('{}\t{}\t{}'.format(year, order_id, profit))
+            count = 0
             last_year = year
-            last_item_type = item_type
-            last_total = float(profit)
-
-    # last item
-    print('{}\t{}\t{}'.format(last_year, last_item_type, last_total))
+        count += 1

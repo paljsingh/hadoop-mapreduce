@@ -51,7 +51,7 @@ if __name__ == '__main__':
     # What are the top 10 order id for a given year by the total_profit
     # we are using 'order_date' field for extracting the year
     for fields in iterator:
-        (year, item_type, total_profit) = (fields[Columns.order_date.value][:4], fields[Columns.item_type.value],
-                                           fields[Columns.total_profit.value])
+        (year, order_id, total_profit) = (fields[Columns.order_date.value][:4], fields[Columns.order_id.value],
+                                          fields[Columns.total_profit.value])
 
-        print('{}\t{}\t{}'.format(year, item_type, total_profit))
+        print('{}\t{}\t{}'.format(year, order_id, total_profit))

@@ -19,6 +19,6 @@ hadoop jar /opt/hadoop-3.2.1/share/hadoop/tools/lib/hadoop-streaming-3.2.1.jar \
   -D mapreduce.partition.keycomparator.options="-k1n,1 -k2,2 -k3,3" \
   -D stream.num.map.output.key.fields=3 \
   -partitioner org.apache.hadoop.mapred.lib.KeyFieldBasedPartitioner \
-  -file mapper.py -mapper mapper.py \
-  -file reducer.py -reducer reducer.py \
+  -file q1/mapper.py -mapper q1/mapper.py \
+  -file q1/reducer.py -reducer q1/reducer.py \
   -input input -output output-q1 
